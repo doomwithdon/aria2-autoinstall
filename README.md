@@ -10,7 +10,7 @@ rclone config
 
 Create rclone gdrive with remote name "gdrv"
 
-wget -O /root/.aria2/aria2_moveto_rclonedrv.sh https://raw.githubusercontent.com/doomwithdon/aria2-autoinstall/master/aria2_moveto_rclonedrv.sh
+wget -O /root/.aria2/aria2_moveto_rclonedrv.sh https://github.com/crazypeace/aria2_auto_rclone/raw/master/aria2_moveto_rclonedrv.sh
 
 chmod +x /root/.aria2/aria2_moveto_rclonedrv.sh
 
