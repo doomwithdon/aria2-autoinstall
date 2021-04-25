@@ -130,23 +130,23 @@ Download_aria2(){
 }
 Download_aria2_conf(){
 	mkdir "${file}" && cd "${file}"
-	wget --no-check-certificate -N "https://github.com/doomwithdon/aria2-autoinstall/blob/main/aria2.conf"
+	wget --no-check-certificate -N "https://raw.githubusercontent.com/doomwithdon/aria2-autoinstall/master/aria2.conf"
 	[[ ! -s "aria2.conf" ]] && echo -e "${Error} Aria2 Configuration file download failed !" && rm -rf "${file}" && exit 1
-	wget --no-check-certificate -N "https://github.com/doomwithdon/aria2-autoinstall/blob/main/dht.dat"
+	wget --no-check-certificate -N "https://raw.githubusercontent.com/doomwithdon/aria2-autoinstall/master/dht.dat"
 	[[ ! -s "dht.dat" ]] && echo -e "${Error} Aria2 DHTFile download failed !" && rm -rf "${file}" && exit 1
 	echo '' > aria2.session
 	sed -i 's/^rpc-secret=computer123/rpc-secret='$(date +%s%N | md5sum | head -c 20)'/g' ${aria2_conf}
 }
 Service_aria2(){
 	if [[ ${release} = "centos" ]]; then
-		if ! wget --no-check-certificate https://github.com/doomwithdon/aria2-autoinstall/blob/main/aria2_centos -O /etc/init.d/aria2; then
+		if ! wget --no-check-certificate https://raw.githubusercontent.com/doomwithdon/aria2-autoinstall/master/aria2_centos -O /etc/init.d/aria2; then
 			echo -e "${Error} Aria2Service management script download failed !" && exit 1
 		fi
 		chmod +x /etc/init.d/aria2
 		chkconfig --add aria2
 		chkconfig aria2 on
 	else
-		if ! wget --no-check-certificate https://github.com/doomwithdon/aria2-autoinstall/blob/main/aria2_debian -O /etc/init.d/aria2; then
+		if ! wget --no-check-certificate https://raw.githubusercontent.com/doomwithdon/aria2-autoinstall/master/aria2_debian -O /etc/init.d/aria2; then
 			echo -e "${Error} Aria2 Service management script download failed !" && exit 1
 		fi
 		chmod +x /etc/init.d/aria2
@@ -562,13 +562,13 @@ Set_iptables(){
 	fi
 }
 Update_Shell(){
-	sh_new_ver=$(wget --no-check-certificate -qO- -t1 -T3 "https://github.com/doomwithdon/aria2-autoinstall/blob/main/aria2.sh"|grep 'sh_ver="'|awk -F "=" '{print $NF}'|sed 's/\"//g'|head -1) && sh_new_type="github"
+	sh_new_ver=$(wget --no-check-certificate -qO- -t1 -T3 "https://raw.githubusercontent.com/doomwithdon/aria2-autoinstall/master/aria2.sh"|grep 'sh_ver="'|awk -F "=" '{print $NF}'|sed 's/\"//g'|head -1) && sh_new_type="github"
 	[[ -z ${sh_new_ver} ]] && echo -e "${Error} Can't link to Github !" && exit 0
 	if [[ -e "/etc/init.d/aria2" ]]; then
 		rm -rf /etc/init.d/aria2
 		Service_aria2
 	fi
-	wget -N --no-check-certificate "https://github.com/doomwithdon/aria2-autoinstall/blob/main/aria2.sh" && chmod +x aria2.sh
+	wget -N --no-check-certificate "https://raw.githubusercontent.com/doomwithdon/aria2-autoinstall/master/aria2.sh" && chmod +x aria2.sh
 	echo -e "The script has been updated to the latest version[ ${sh_new_ver} ] !(Note: Because the update method is to directly overwrite the currently running script, some errors may be prompted below, just ignore it)" && exit 0
 }
 action=$1
