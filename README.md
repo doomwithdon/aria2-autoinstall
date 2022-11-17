@@ -4,7 +4,7 @@ sudo su
 
 sudo apt-get install ddclient
 
-sudo apt-get install rclone
+sudo -v ; curl https://rclone.org/install.sh | sudo bash
 
 rclone config
 
