@@ -16,6 +16,9 @@ wget -O aria2_moveto_rclonedrv.sh https://github.com/crazypeace/aria2_auto_rclon
 
 chmod +x aria2_moveto_rclonedrv.sh
 
+crontab -e
+@reboot /etc/init.d/aria2 start
+@reboot rclone serve webdav --addr :7654 --user username --pass password gdrv:
 
 
 
